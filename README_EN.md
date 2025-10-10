@@ -103,6 +103,80 @@ set OPENAI_API_KEY=your_openai_key_here
 
 For detailed configuration instructions, please refer to the [Environment Variable Configuration Guide](docs/env_setup.md).
 
+## Configuration Parameters
+
+### Knowledge Preparation Stage Configuration
+
+The knowledge preparation stage includes the following key configuration parameters:
+
+#### Search API Configuration
+- **Search Engine**: Google (via SerpAPI)
+- **Number of Results**: 3 web pages per target
+- **Time Window**: No restrictions (retrieves most relevant results)
+- **Request Timeout**: 10 seconds
+
+#### Text Processing Configuration
+- **Chunk Size**: 200 tokens (approximately 1000 characters)
+- **Chunk Overlap**: 20 tokens (approximately 100 characters)
+- **Break Strategy**: Prioritize breaking at sentence endings (`[.!?]\s+`)
+- **Character Encoding**: UTF-8
+
+#### Embedding Model Configuration
+- **Chinese Model**: BAAI/bge-base-zh-v1.5
+- **English Model**: BAAI/bge-base-en-v1.5
+- **Vector Dimension**: 768 dimensions
+- **Language Detection**: Based on Unicode character range (`\u4e00-\u9fff` for Chinese)
+
+#### Deduplication and Selection Configuration
+- **Similarity Threshold**: 0.85 (values above this are considered duplicates)
+- **Similarity Calculation**: Cosine similarity
+- **Deduplication Strategy**: Greedy algorithm
+- **Knowledge Selection Count**: Top-3 most relevant segments
+
+#### Stance Label Generation Configuration
+- **Language Model**: Your LLM
+- **Generation Temperature**: 0.7
+- **Maximum Output**: 300 tokens
+- **Retry Attempts**: 3 times
+- **API Call Interval**: 1 second
+
+### Complete Configuration Dictionary
+
+```python
+knowledge_preparation_config = {
+    # Search configuration
+    "search_api": "SerpAPI",
+    "search_engine": "google", 
+    "num_results": 3,
+    "request_timeout": 10,
+    
+    # Text processing configuration
+    "chunk_size": 200,
+    "overlap": 20,
+    "char_per_token": 5,
+    "break_patterns": r'[.!?]\s+',
+    
+    # Embedding model configuration
+    "embedding_models": {
+        "zh": "BAAI/bge-base-zh-v1.5",
+        "en": "BAAI/bge-base-en-v1.5"
+    },
+    "embedding_dimension": 768,
+    
+    # Deduplication and selection configuration
+    "similarity_threshold": 0.85,
+    "top_k": 3,
+    "similarity_metric": "cosine",
+    
+    # LLM configuration
+    "llm_model": "Your LLM",
+    "temperature": 0.7,
+    "max_tokens": 300,
+    "max_retries": 3,
+    "api_call_delay": 1
+}
+```
+
 ### Running Examples
 Run this file to get a complete example.
 ```bash
