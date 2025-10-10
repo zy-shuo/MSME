@@ -103,6 +103,80 @@ set OPENAI_API_KEY=your_openai_key_here
 
 详细配置说明请参考 [环境变量配置指南](docs/env_setup.md)。
 
+## 配置参数
+
+### 知识准备阶段配置
+
+知识准备阶段包含以下关键配置参数：
+
+#### 搜索API配置
+- **搜索引擎**: Google (通过SerpAPI)
+- **搜索结果数量**: 3个网页/目标
+- **时间窗口**: 无限制（获取最相关结果）
+- **请求超时**: 10秒
+
+#### 文本处理配置
+- **分块大小**: 200 tokens (约1000字符)
+- **块间重叠**: 20 tokens (约100字符)
+- **断点策略**: 优先在句末标点处断开 (`[.!?]\s+`)
+- **字符编码**: UTF-8
+
+#### 嵌入模型配置
+- **中文模型**: BAAI/bge-base-zh-v1.5
+- **英文模型**: BAAI/bge-base-en-v1.5
+- **向量维度**: 768维
+- **语言检测**: 基于Unicode字符范围 (`\u4e00-\u9fff` 为中文)
+
+#### 去重与选择配置
+- **相似度阈值**: 0.85 (超过此值视为重复)
+- **相似度计算**: 余弦相似度
+- **去重策略**: 贪心算法
+- **知识选择数量**: Top-3 最相关片段
+
+#### 立场标签生成配置
+- **语言模型**: Your LLM
+- **生成温度**: 0.7
+- **最大输出**: 300 tokens
+- **重试次数**: 3次
+- **API调用间隔**: 1秒
+
+### 完整配置字典
+
+```python
+knowledge_preparation_config = {
+    # 搜索配置
+    "search_api": "SerpAPI",
+    "search_engine": "google", 
+    "num_results": 3,
+    "request_timeout": 10,
+    
+    # 文本处理配置
+    "chunk_size": 200,
+    "overlap": 20,
+    "char_per_token": 5,
+    "break_patterns": r'[.!?]\s+',
+    
+    # 嵌入模型配置
+    "embedding_models": {
+        "zh": "BAAI/bge-base-zh-v1.5",
+        "en": "BAAI/bge-base-en-v1.5"
+    },
+    "embedding_dimension": 768,
+    
+    # 去重与选择配置
+    "similarity_threshold": 0.85,
+    "top_k": 3,
+    "similarity_metric": "cosine",
+    
+    # LLM配置
+    "llm_model": "Your LLM",
+    "temperature": 0.7,
+    "max_tokens": 300,
+    "max_retries": 3,
+    "api_call_delay": 1
+}
+```
+
 ### 运行示例
 运行该文件以获取一个完整的示例。
 ```bash
