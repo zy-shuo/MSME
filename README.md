@@ -298,8 +298,5 @@ Contains the same information as the Excel file, but in a format more suitable f
 - numpy
 - tqdm
 
-## License
-
-MIT
 
 
