@@ -224,17 +224,7 @@ View complete usage example:
 python examples/example.py
 ```
 
-### 4. Batch Processing
 
-Use batch processing script to handle multiple datasets:
-
-```bash
-# Linux/Mac
-bash run_batch.sh
-
-# Windows
-# Please manually run run_full_pipeline.py multiple times, or create corresponding .bat script
-```
 
 ## Complete Example
 
@@ -262,25 +252,6 @@ python run_full_pipeline.py \
 # - SEM16_results.xlsx: Stance detection results (Excel format)
 # - SEM16_results.json: Stance detection results (JSON format, with detailed information)
 ```
-
-**Program Execution Flow:**
-
-1. **Stage 0 - Knowledge Preparation**:
-   - Automatically identify unique targets in the dataset (e.g., "Hillary Clinton", "Donald Trump", etc.)
-   - Perform web search for each target to obtain relevant background knowledge
-   - Generate Explicit Stance Labels (ESL)
-   - Save knowledge to dataset
-
-2. **Stage 1 - Expert Reasoning**:
-   - Call three experts to analyze each text
-   - Knowledge Expert refines background knowledge and reasons
-   - Label Expert performs fine-grained analysis based on ESL
-   - Pragmatic Expert analyzes rhetorical devices
-   - Meta-Judge synthesizes opinions from three experts and provides final stance
-
-3. **Result Saving**:
-   - Automatically save every 10 processed entries
-   - Support checkpoint resumption (if program is interrupted, can continue from where it stopped)
 
 ## Output Results Description
 
@@ -330,4 +301,5 @@ Contains the same information as the Excel file, but in a format more suitable f
 ## License
 
 MIT
+
 
