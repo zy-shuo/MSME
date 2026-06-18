@@ -298,5 +298,23 @@ Contains the same information as the Excel file, but in a format more suitable f
 - numpy
 - tqdm
 
+## Cite
 
+> **If you use this codebase, please cite:**  
+> 
+> **BibTeX:**
+> ```bibtex
+> @inproceedings{zhang2026msme,
+>   title={MSME: A Multi-Stage Multi-Expert Framework for Zero-Shot Stance Detection},
+>   author={Zhang, Yuanshuo and Li, Aohua and Chen, Bo and Sun, Jingbo and Zhao, Xiaobing},
+>   booktitle={Proceedings of the AAAI Conference on Artificial Intelligence},
+>   volume={40},
+>   number={41},
+>   pages={34879--34887},
+>   year={2026}
+> }
+> ```
+>
+> **APA:**  
+> Zhang, Y., Li, A., Chen, B., Sun, J., & Zhao, X. (2026). MSME: A Multi-Stage Multi-Expert Framework for Zero-Shot Stance Detection. *Proceedings of the AAAI Conference on Artificial Intelligence*, 40(41), 34879–34887. https://doi.org/10.1609/aaai.v40i41.40791
 
